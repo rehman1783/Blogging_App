@@ -61,9 +61,9 @@ class _MainScreenState extends State<MainScreen> {
                 onTap: () => _onTap(index),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   decoration: BoxDecoration(
-                    color: isSelected ? AppColors.primary.withOpacity(0.1) : Colors.transparent,
+                    color: isSelected ? AppColors.primary.withOpacity(0.3) : Colors.transparent,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(

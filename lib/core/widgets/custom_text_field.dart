@@ -11,11 +11,11 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     super.key,
-    required this.label,
-    required this.icon,
+     
+     required this.icon,
     this.isPassword = false,
     this.controller,
-    this.keyboardType = TextInputType.text,
+    this.keyboardType = TextInputType.text, required this.label,
   });
 
   @override

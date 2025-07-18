@@ -1,7 +1,6 @@
 import 'package:blogging_app/app/app_colors.dart';
 import 'package:blogging_app/app/app_constants.dart';
 import 'package:blogging_app/app/app_routes.dart';
-import 'package:blogging_app/app/app_theme.dart';
 import 'package:blogging_app/core/widgets/custom_button.dart';
 import 'package:blogging_app/core/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class SignupScreen extends StatelessWidget {
         padding: const EdgeInsets.all(AppPadding.screen),
         child: Column(
           children: [
-            const SizedBox(height: 60),
+            const SizedBox(height: 100),
 
             // Logo
             Center(
