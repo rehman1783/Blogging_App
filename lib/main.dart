@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:blogging_app/home_screen.dart';
+import 'app/app_theme.dart';
+import 'app/app_routes.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'BlogVerse',
+      theme: AppTheme.lightTheme,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
+      initialRoute: AppRoutes.splash,
       debugShowCheckedModeBanner: false,
-      title: 'Whtsapp Clone',
-      home: HomeScreen(),
     );
   }
 }
