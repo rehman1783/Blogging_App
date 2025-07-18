@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'BlogVerse',
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.main,
       debugShowCheckedModeBanner: false,
     );
   }

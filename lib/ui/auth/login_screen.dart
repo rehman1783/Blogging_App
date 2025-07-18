@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
             CustomButton(
               label: 'Login',
               onPressed: () {
-                Navigator.pushReplacementNamed(context, AppRoutes.home);
+                Navigator.pushReplacementNamed(context, AppRoutes.main);
               },
             ),
             const SizedBox(height: 20),
