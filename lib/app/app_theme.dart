@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
-
-class AppColors {
-  static const primary = Color(0xFF0D47A1);
-  static const secondary = Color(0xFF1976D2);
-  static const background = Color(0xFFF5F5F5);
-  static const textPrimary = Color(0xFF212121);
-  static const textSecondary = Color(0xFF757575);
-  static const white = Colors.white;
-  static const black = Colors.black;
-}
+import 'app_colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.primary,
-      foregroundColor: AppColors.white,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.white,
       elevation: 0,
-    ),
-    textTheme: TextTheme(
-      titleLarge: TextStyle(
+      iconTheme: IconThemeData(color: AppColors.primary),
+      titleTextStyle: TextStyle(
+        color: AppColors.primary,
         fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppColors.white,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: AppColors.border),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: AppColors.primary),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      labelStyle: const TextStyle(color: AppColors.textSecondary),
+    ),
+    textTheme: const TextTheme(
+      titleLarge: TextStyle(
+        fontSize: 22,
         fontWeight: FontWeight.bold,
         color: AppColors.textPrimary,
       ),
@@ -34,7 +44,10 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     ),
   );
