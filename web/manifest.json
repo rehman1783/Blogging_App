@@ -1,6 +1,6 @@
 {
-    "name": "testing_project",
-    "short_name": "testing_project",
+    "name": "blogging_app",
+    "short_name": "blogging_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
