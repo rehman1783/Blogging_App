@@ -49,7 +49,7 @@ final role = userDoc['role'];
       } else if (role == 'writer') {
         Navigator.pushReplacementNamed(context, AppRoutes.writerDashboard);
       } else {
-        Navigator.pushReplacementNamed(context, AppRoutes.main);
+        Navigator.pushReplacementNamed(context, AppRoutes.readerDashboard);
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

@@ -9,7 +9,7 @@ class BlogDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.primary,
         elevation: 0.5,
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
         title: const Text(
@@ -24,9 +24,11 @@ class BlogDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+SizedBox(height: 10,),
+
             // Blog Image
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
               child: Image.asset(
                 "assets/images/code_lptp.jpg",
                 width: double.infinity,

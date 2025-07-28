@@ -1,9 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:blogging_app/app/app_colors.dart';
 import 'package:blogging_app/core/widgets/custom_text_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AddPostScreen extends StatefulWidget {
@@ -18,12 +20,44 @@ class _CreatePostScreenState extends State<AddPostScreen> {
   final _contentController = TextEditingController();
   File? _selectedImage;
 
+  String? _userName;
+  String? profileImageUrl;
 
-Future<void> requestPermissions() async {
-  await Permission.camera.request();
-  await Permission.photos.request(); // For iOS
-  await Permission.storage.request(); // For Android < 13
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+  }
+
+  Future<void> _fetchUserData() async {
+  final user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+
+    if (doc.exists) {
+      final data = doc.data()!;
+      setState(() {
+        _userName = data['name'] ?? 'Unknown User';
+        // Use correct field name (same as ProfileScreen)
+        profileImageUrl = data['imageUrl'] ?? '';
+      });
+    } else {
+      setState(() {
+        _userName = 'Unknown User';
+        profileImageUrl = '';
+      });
+    }
+  }
 }
+
+  Future<void> requestPermissions() async {
+    await Permission.camera.request();
+    await Permission.photos.request();
+    await Permission.storage.request();
+  }
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -42,9 +76,14 @@ Future<void> requestPermissions() async {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: const Text('Create Post', style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold, fontSize: 22)),
+        title: const Text(
+          'Create Post',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -53,27 +92,22 @@ Future<void> requestPermissions() async {
           children: [
             /// Profile Header
             Row(
-              children: const [
-                CircleAvatar(
-                  radius: 24,
-                  backgroundImage:
-                      NetworkImage('https://randomuser.me/api/portraits/men/45.jpg'),
-                ),
-                SizedBox(width: 12),
+              children: [
+              CircleAvatar(
+  radius: 24,
+  backgroundImage: (profileImageUrl != null && profileImageUrl!.isNotEmpty)
+      ? NetworkImage(profileImageUrl!)
+      : const AssetImage("assets/images/blogverse_logo.png") as ImageProvider,
+),
+
+                const SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Abdul Rehman',
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      '@abdulrehman',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 12,
-                      ),
+                      _userName ?? 'Loading...',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ],
                 ),
@@ -138,15 +172,13 @@ Future<void> requestPermissions() async {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
-                  
+                  // Add post logic here
                 },
                 icon: const Icon(Icons.publish_outlined, color: Colors.white),
                 label: const Text(
                   'Publish Post',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,

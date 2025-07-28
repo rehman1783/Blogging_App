@@ -89,11 +89,21 @@ class _SignupScreenState extends State<SignupScreen> {
             // Role Dropdown
             DropdownButtonFormField<String>(
               value: _selectedRole,
-              decoration: InputDecoration(
-                labelText: "Select Role",
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                prefixIcon: const Icon(Icons.person_pin),
-              ),
+          decoration: InputDecoration(
+  labelText: "Select Role",
+  floatingLabelBehavior: FloatingLabelBehavior.auto,
+  contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+  enabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: AppColors.border, width: 2),
+    borderRadius: BorderRadius.circular(12),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: AppColors.primary, width: 2),
+    borderRadius: BorderRadius.circular(12),
+  ),
+  prefixIcon: const Icon(Icons.person_pin),
+),
+
               items: const [
                 DropdownMenuItem(value: 'reader', child: Text('Reader')),
                 DropdownMenuItem(value: 'writer', child: Text('Writer')),
